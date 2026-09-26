@@ -1,0 +1,16 @@
+[
+  {
+    "tag": "V",
+    "name": "Venture investors",
+    "regex": "\\bVCs?\\b|venture capital|ventures?\\b|investors?",
+    "strong": ["title", "host_names"],
+    "weak": ["hosts"]
+  },
+  {
+    "tag": "A",
+    "name": "AI related",
+    "regex": "\\bAI\\b|agentic|\\bLLMs?\\b",
+    "strong": ["title", "categories"],
+    "weak": []
+  }
+]
