@@ -8,7 +8,7 @@
 
 把这段粘贴给 Claude Code、Codex CLI 或任何编程助手：
 
-> 请 clone https://github.com/yyu0310/luma-event-scanner，先读 AGENTS.md，再帮我设置。请问我要监控哪些 Luma 日历、我在意什么。日历的 slug 是它 luma.com 网址的最后一段。然后按 examples/criteria.example.json 帮我写一份 criteria.json，再运行一次。
+> 请 clone https://github.com/yyu0310/luma-event-scanner ，先读 AGENTS.md，再帮我设置。请问我要监控哪些 Luma 日历、我在意什么。日历的 slug 是它 luma.com 网址的最后一段。然后按 examples/criteria.example.json 帮我写一份 criteria.json，再运行一次。
 
 这个项目不需要任何密码、token 或 API key，所以每个步骤都可以交给助手代劳。
 
