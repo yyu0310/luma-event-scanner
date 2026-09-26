@@ -47,3 +47,39 @@ python3 luma_scan.py
 
 然後打開 `~/.luma-event-scanner/candidates.md`。第一次會把每場活動下載一次，每秒約兩次請求，300 場的日曆要幾分鐘。之後只會下載新活動。
 
+## 指令
+
+| 指令 | 作用 |
+| --- | --- |
+| `python3 luma_scan.py` | 列出日曆、掃描新活動、寫出報表 |
+| `--data-dir DIR` | 帳本與報表放哪裡（預設 `~/.luma-event-scanner`） |
+| `--full` | 全部重掃，不只掃新活動 |
+| `--note KEY "文字"` | 幫活動加備註，重跑不會消失 |
+| `--exclude KEY [原因]` | 手動把活動放進汰除名單 |
+| `--restore KEY` | 把活動從汰除名單還原 |
+| `--peek` | 產生今日候選，但不標記為已看過 |
+| `--timezone NAME` | 顯示時區，例如 `Asia/Singapore`（預設：系統時區） |
+| `--rescan-days N` | 已掃過的活動隔 N 天重掃（預設 3） |
+
+`KEY` 是活動的 `api_id`，或活動網址 `luma.com/<KEY>` 的最後一段。
+
+## 排序怎麼運作
+
+`criteria.json` 是一個由重要到次要排列的清單。每個條件有一個 regex，和兩份要去比對的欄位清單：
+
+```json
+{"tag": "V", "name": "Venture investors", "regex": "\\bVCs?\\b|venture|investors?",
+ "strong": ["title", "host_names"], "weak": ["hosts"]}
+```
+
+- 可用欄位：`title`、`hosts`、`host_names`、`guests`、`categories`、`calendar`、`description`。`hosts` 比對主辦名稱與簡介，`host_names` 只比對名稱。
+- 命中 `strong` 欄位是強匹配，命中 `weak` 欄位是弱匹配。
+- 每場活動歸在它命中的最重要的那個條件底下。同一區內強匹配在前，再依開始時間排。
+- 像 "investor" 或 "AI" 這種幾乎每場說明都會出現的常見字，通常不要把 `description` 放進強匹配。
+
+沒有 `criteria.json` 時，工具只做關鍵字掃描。
+
+## 汰除名單
+
+列在 `candidates.md` 的每場活動，隔天會移進 `excluded.md`，所以每天跑只會看到新的。同一天跑兩次不會有任何改變。只想預覽就加 `--peek`，誤汰除的用 `--restore` 還原。沒有命中任何條件的活動不會被汰除，所以主辦之後改了說明、開始符合條件時，它會出現。
+
