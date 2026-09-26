@@ -110,7 +110,7 @@ All requests are read-only, unauthenticated GETs at about two per second.
 
 ## Limitations
 
-- **Unofficial.** The three endpoints above are undocumented and can change without notice. This is a personal, free tool that reads public pages at a low request rate, and it isn't affiliated with Luma. Please follow Luma's terms of service.
+- **Unofficial.** The three endpoints above are undocumented and can change without notice. This project is based entirely on academic research and has no commercial use. It reads public pages at a low request rate and isn't affiliated with Luma. Please follow Luma's terms of service.
 - **Public data only.** It can't create events or manage guests, so it doesn't replace the official API.
 - **Text matching only.** It doesn't understand meaning. A sponsor that appears only as a logo image is invisible.
 - **Only the calendars you name.** Events that are not in those calendars are not seen.
