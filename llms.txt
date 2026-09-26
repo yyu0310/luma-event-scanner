@@ -1,0 +1,39 @@
+# luma-event-scanner
+
+> A free Python tool that scans Luma calendars, matches each event's full description against your keywords, ranks events by your priorities, and remembers which ones you already reviewed. Standard library only, no API key, no login.
+
+## What it does
+
+- Lists the upcoming events of the Luma calendars you name and downloads each event's detail once
+- Matches keywords against title, hosts, guests and description
+- Ranks events by a user-written `criteria.json`, with strong and weak matches ordered by importance
+- Writes `candidates.md` for today's list and `excluded.md` for events already seen or excluded by hand
+- Events shown one day are excluded from the next day's list, so a daily run only shows what is new
+
+## Key files
+
+- `luma_scan.py`: the whole tool, single file
+- `tests/test_luma_scan.py`: offline unit and end-to-end tests
+- `examples/criteria.example.json`: a neutral starting point for the criteria file
+- `AGENTS.md`: architecture notes for AI agents working on this codebase
+- `README.md`, `README.zh-TW.md`, `README.zh-CN.md`: setup guides
+
+## Why it's free
+
+- Reads public Luma event pages through unauthenticated GET requests, about two per second
+- Luma's official API needs Luma Plus, which costs $59 a month billed annually
+
+## Known limitations
+
+- Unofficial: the endpoints are undocumented and may change or break. Not affiliated with Luma, please follow its terms of service
+- Public data only, can't create events or manage guests
+- Text matching only, sponsors that appear as logo images are invisible
+- Tested on macOS with Python 3.9 and 3.13
+
+## Repository
+
+https://github.com/yyu0310/luma-event-scanner
+
+## License
+
+MIT
