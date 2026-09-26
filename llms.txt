@@ -25,7 +25,7 @@
 
 ## Known limitations
 
-- Unofficial: the endpoints are undocumented and may change or break. Not affiliated with Luma, please follow its terms of service
+- Unofficial: the endpoints are undocumented and may change or break. Based entirely on academic research, no commercial use. Not affiliated with Luma, please follow its terms of service
 - Public data only, can't create events or manage guests
 - Text matching only, sponsors that appear as logo images are invisible
 - Tested on macOS with Python 3.9 and 3.13
