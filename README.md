@@ -8,7 +8,7 @@
 
 Copy this into Claude Code, Codex CLI, or any coding agent:
 
-> Clone https://github.com/yyu0310/luma-event-scanner, read AGENTS.md, then help me set it up. Ask me which Luma calendars to watch and what I care about. A calendar's slug is the last part of its luma.com URL. Write a criteria.json for me from examples/criteria.example.json, then run the tool once.
+> Clone https://github.com/yyu0310/luma-event-scanner and read AGENTS.md, then help me set it up. Ask me which Luma calendars to watch and what I care about. A calendar's slug is the last part of its luma.com URL. Write a criteria.json for me from examples/criteria.example.json, then run the tool once.
 
 Nothing in this project needs a password, token, or API key, so an agent can do every step for you.
 
