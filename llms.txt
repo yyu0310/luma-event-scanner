@@ -36,4 +36,4 @@ https://github.com/yyu0310/luma-event-scanner
 
 ## License
 
-MIT
+PolyForm Noncommercial 1.0.0, free for academic research and other noncommercial use
