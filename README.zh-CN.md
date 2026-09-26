@@ -14,3 +14,36 @@
 
 这个项目不需要任何密码、token 或 API key，所以每个步骤都可以交给助手代劳。
 
+## 为什么做这个
+
+大型会议周的 Luma 上会冒出数百场周边活动。Luma 没有跨活动说明的搜索，能帮上忙的官方 API 又锁在付费方案里。而你在意的内容常常只出现在说明正文，不在标题。
+
+| 你想做的事 | 这个工具怎么做 |
+| --- | --- |
+| 找出说明里提到某件事的活动 | `--keywords` 匹配标题、主办、嘉宾与说明 |
+| 先看最相关的活动 | `criteria.json` 按你定的优先顺序排序 |
+| 每天查，不重看旧活动 | 列给你看过的活动，第二天自动进淘汰名单 |
+| 跳过已经决定的活动 | `--exclude` 与 `--restore` |
+| 给活动做笔记 | `--note` |
+
+## 快速开始
+
+要求：Python 3.9 以上。只用标准库，不用安装任何东西。
+
+```bash
+git clone https://github.com/yyu0310/luma-event-scanner.git
+cd luma-event-scanner
+
+# 第一次运行：指定要监控的日历（luma.com/<slug>），关键词 regex 可选
+python3 luma_scan.py --calendars my-calendar,another-calendar --keywords "grant|hackathon" --timezone Asia/Shanghai
+
+# 可选：按自己的优先顺序排序
+mkdir -p ~/.luma-event-scanner
+cp examples/criteria.example.json ~/.luma-event-scanner/criteria.json   # 再自行修改
+
+# 之后每次运行（日历与关键词都会被记住）
+python3 luma_scan.py
+```
+
+然后打开 `~/.luma-event-scanner/candidates.md`。第一次会把每场活动下载一次，每秒约两次请求，300 场的日历要几分钟。之后只会下载新活动。
+
