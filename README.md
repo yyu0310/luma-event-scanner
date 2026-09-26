@@ -83,3 +83,47 @@ Without a `criteria.json` the tool only does the keyword scan.
 
 Every event listed in `candidates.md` moves to `excluded.md` the next day, so a daily run only shows what is new. Running the tool twice on the same day changes nothing. Use `--peek` when you only want a preview, and `--restore` if you excluded something by mistake. Events that matched none of your criteria are never excluded, so if a host edits the description later and it starts to match, it appears.
 
+## Where your data lives
+
+By default in `~/.luma-event-scanner/`, outside of any repository:
+
+| File | Content |
+| --- | --- |
+| `ledger.json` | The state: every event seen, when it was scanned, notes, exclusions |
+| `scanned.md` | Human-readable view of the ledger |
+| `candidates.md` | Events that match your criteria and were not reviewed yet, ranked |
+| `excluded.md` | Events you have already seen or excluded by hand |
+| `criteria.json` | Your criteria. You write this one |
+| `cache/` | Raw event details, so changing criteria needs no re-download |
+
+Use one `--data-dir` per topic if you follow several unrelated things.
+
+## How it works
+
+1. `GET api.lu.ma/url` turns a calendar slug into its id.
+2. `GET api.lu.ma/calendar/get-items` lists the upcoming events, page by page.
+3. `GET api.lu.ma/event/get` downloads each event's detail: description, hosts, guests and categories. Details are cached.
+4. Criteria are scored from the cached details, so editing `criteria.json` needs no network.
+5. Events you were shown get a `shown_date`. An event whose `shown_date` is before today is excluded.
+
+All requests are read-only, unauthenticated GETs at about two per second.
+
+## Limitations
+
+- **Unofficial.** The three endpoints above are undocumented and can change without notice. This is a personal, free tool that reads public pages at a low request rate, and it isn't affiliated with Luma. Please follow Luma's terms of service.
+- **Public data only.** It can't create events or manage guests, so it doesn't replace the official API.
+- **Text matching only.** It doesn't understand meaning. A sponsor that appears only as a logo image is invisible.
+- **Only the calendars you name.** Events that are not in those calendars are not seen.
+- **Tested on macOS with Python 3.9 and 3.13.** Linux and Windows should work because only the standard library is used, but they're untested. Time zone names on Windows need the `tzdata` package.
+
+## Development
+
+```bash
+python3 -m unittest discover tests -v
+```
+
+The tests are offline. They replace the network with a small in-memory Luma calendar and write to temporary directories.
+
+## License
+
+MIT
