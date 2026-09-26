@@ -21,7 +21,6 @@
 ## Why it's free
 
 - Reads public Luma event pages through unauthenticated GET requests, about two per second
-- Luma's official API needs Luma Plus, which costs $59 a month billed annually
 
 ## Known limitations
 
