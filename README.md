@@ -126,4 +126,4 @@ The tests are offline. They replace the network with a small in-memory Luma cale
 
 ## License
 
-MIT
+[PolyForm Noncommercial 1.0.0](LICENSE). Free for academic research and other noncommercial use.
