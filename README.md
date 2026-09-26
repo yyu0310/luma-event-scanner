@@ -4,8 +4,6 @@
 
 **Free Luma calendar scanner.** It reads the full description of every upcoming event in the calendars you name, matches them against your keywords, ranks them by your priorities, and remembers what you have already reviewed, so tomorrow's list only shows what is new.
 
-No paid API needed. Luma's official API requires Luma Plus, which [costs $59 a month billed annually](https://luma.com/pricing). This tool reads public event pages, so it costs nothing.
-
 ## Install with an AI coding agent
 
 Copy this into Claude Code, Codex CLI, or any coding agent:
