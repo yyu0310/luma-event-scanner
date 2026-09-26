@@ -126,4 +126,4 @@ python3 -m unittest discover tests -v
 
 ## 授權
 
-MIT
+[PolyForm Noncommercial 1.0.0](LICENSE)。學術研究等非商業用途可免費使用。
