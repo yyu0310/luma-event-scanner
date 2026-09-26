@@ -47,3 +47,39 @@ python3 luma_scan.py
 
 Then open `~/.luma-event-scanner/candidates.md`. The first run downloads every event once at about two requests per second, so a calendar with 300 events takes a few minutes. Later runs only download new events.
 
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `python3 luma_scan.py` | List the calendars, scan new events, write the reports |
+| `--data-dir DIR` | Where the ledger and reports live (default `~/.luma-event-scanner`) |
+| `--full` | Rescan every event, including ones already scanned |
+| `--note KEY "text"` | Attach a note to an event, it survives reruns |
+| `--exclude KEY [reason]` | Put an event on the excluded list by hand |
+| `--restore KEY` | Take an event off the excluded list |
+| `--peek` | Build today's candidates without marking them as seen |
+| `--timezone NAME` | Display timezone, for example `Asia/Singapore` (default: your system timezone) |
+| `--rescan-days N` | Rescan already scanned events after N days (default 3) |
+
+`KEY` is an event's `api_id` or the last part of its URL (`luma.com/<KEY>`).
+
+## How ranking works
+
+`criteria.json` is a list ordered from most to least important. Each criterion has a regex and two lists of fields to look in:
+
+```json
+{"tag": "V", "name": "Venture investors", "regex": "\\bVCs?\\b|venture|investors?",
+ "strong": ["title", "host_names"], "weak": ["hosts"]}
+```
+
+- Fields you can use: `title`, `hosts`, `host_names`, `guests`, `categories`, `calendar`, `description`. `hosts` matches host names and bios, `host_names` matches names only.
+- A hit in a `strong` field is a strong match, a hit in a `weak` field is a weak match.
+- Each event is listed under the most important criterion it matches. Inside a section, strong matches come first, then earlier start times.
+- Keeping `description` out of the strong list is usually right for common words such as "investor" or "AI", which appear in almost every description.
+
+Without a `criteria.json` the tool only does the keyword scan.
+
+## The excluded list
+
+Every event listed in `candidates.md` moves to `excluded.md` the next day, so a daily run only shows what is new. Running the tool twice on the same day changes nothing. Use `--peek` when you only want a preview, and `--restore` if you excluded something by mistake. Events that matched none of your criteria are never excluded, so if a host edits the description later and it starts to match, it appears.
+
